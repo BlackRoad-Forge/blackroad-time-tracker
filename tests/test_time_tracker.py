@@ -80,7 +80,12 @@ def test_duration_str():
 
 
 def test_project_create(tmp_db):
-    args = MagicMock(name="myproj", client="Acme", rate=150.0, budget=40.0, color="#FF0000")
+    args = MagicMock()
+    args.name = "myproj"
+    args.client = "Acme"
+    args.rate = 150.0
+    args.budget = 40.0
+    args.color = "#FF0000"
     tt.cmd_project_create(args)
     db  = tt.get_db()
     row = db.execute("SELECT * FROM projects WHERE name='myproj'").fetchone()
